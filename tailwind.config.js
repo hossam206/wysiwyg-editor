@@ -17,7 +17,7 @@ export default {
         padding: "10px",
       },
       colors: {
-        primary: "#1F4B43",
+        primary: "#FCFCFC",
         secondary: "#E7C873",
         tertiary: "#1A1A1A",
         gray: {
