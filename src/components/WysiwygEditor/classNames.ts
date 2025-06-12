@@ -9,12 +9,15 @@ export const editorStyles = {
   ListStyle: clx(
     "text-xs capitalize font-medium text-tertiary text-gray-70 hover:text-gray-100 cursor-pointer Transition outline-none"
   ),
-  iconToolsDiv: clx("flexRow gap-2 py-2 px-4 "),
+  iconToolsDiv: clx("flexRow gap-2 py-2 px-4 justify-between"),
   iconTool: clx(
     "outline-none opacity-70 hover:opacity-100  Transition text-sm font-semibold  rounded-md p-1    "
   ),
   editorStyle: clx(
     " overflow-y-auto p-4 bg-white text-sm leading-relaxed cursor-text",
     "border-t border-gray-30 focus-within:border-gray-40 Transition rounded-b-xl focus-within:shadow-md  "
+  ),
+  ResetBtn: clx(
+    "bg-red-600 w-16 rounded-lg text-white py-1 font-medium hover:bg-red-700 Transition"
   ),
 };
