@@ -13,8 +13,15 @@ import { Lists, editorTools } from "./assets";
 import { editorStyles } from "./classNames";
 import clx from "clsx";
 import type { WysiwygEditorProps } from "../../types/WysiwygEditor";
-const WysiwygEditor = ({ value, onChange }: WysiwygEditorProps) => {
+
+const WysiwygEditor = ({
+  value,
+  onChange,
+  className,
+  style,
+}: WysiwygEditorProps) => {
   const isControlled = value !== undefined && onChange !== undefined;
+
   // Internal editor state (used in both modes)
   const [editorState, setEditorState] = useState(() => {
     if (isControlled && value) {
@@ -45,6 +52,7 @@ const WysiwygEditor = ({ value, onChange }: WysiwygEditorProps) => {
   };
 
   const currentStyle = editorState.getCurrentInlineStyle();
+
   // apply affects to the text when change edit icon
   const toggleInlineStyle = useCallback(
     (style: string) => {
@@ -61,7 +69,7 @@ const WysiwygEditor = ({ value, onChange }: WysiwygEditorProps) => {
   };
 
   return (
-    <div className={editorStyles.editorContainer}>
+    <div className={clx(editorStyles.editorContainer, className)} style={style}>
       <div className={editorStyles.listsDiv}>
         {Lists?.map((item) => (
           <button key={item.id} className={editorStyles.ListStyle}>
