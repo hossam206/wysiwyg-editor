@@ -90,6 +90,7 @@ const WysiwygEditor = ({
                 const isActive = currentStyle.has(item.style);
                 return (
                   <button
+                      data-testid={`toolbar-${item.style.toLowerCase()}`}
                     key={item.id}
                     className={clx(
                       editorStyles.iconTool,
@@ -106,9 +107,28 @@ const WysiwygEditor = ({
                 );
               })}
             </div>
-            <button className={editorStyles.ResetBtn} onClick={resetEditor}>
-              Reset
-            </button>
+            <div className="flexRow justify-end w-full gap-2">
+              <button
+                className={clx(
+                  editorStyles.EditorBtn,
+                  "bg-red-600 hover:bg-red-700"
+                )}
+                onClick={resetEditor}
+              >
+                Reset
+              </button>
+              <button
+                onClick={() => {
+                  console.log("Saved content:", editorState);
+                }}
+                className={clx(
+                  editorStyles.EditorBtn,
+                  "bg-secondary hover:bg-blue-700"
+                )}
+              >
+                save
+              </button>
+            </div>
           </div>
         </div>
       )}
