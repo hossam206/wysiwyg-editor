@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect } from "react";
-
 import {
   ContentState,
   Editor,
@@ -19,6 +18,7 @@ const WysiwygEditor = ({
   onChange,
   className,
   style,
+  renderToolbar,
 }: WysiwygEditorProps) => {
   const isControlled = value !== undefined && onChange !== undefined;
 
@@ -70,38 +70,50 @@ const WysiwygEditor = ({
 
   return (
     <div className={clx(editorStyles.editorContainer, className)} style={style}>
-      <div className={editorStyles.listsDiv}>
-        {Lists?.map((item) => (
-          <button key={item.id} className={editorStyles.ListStyle}>
-            {item.label}
-          </button>
-        ))}
-      </div>
-      <div className={editorStyles.iconToolsDiv}>
-        <div className="flexRow gap-2">
-          {editorTools?.map((item) => {
-            const isActive = currentStyle.has(item.style);
-            return (
-              <button
-                key={item.id}
-                className={clx(
-                  editorStyles.iconTool,
-                  isActive && "bg-gray-20 border border-solid border-gray-40"
-                )}
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  toggleInlineStyle(item.style);
-                }}
-              >
-                {item.toolIcon}
+      {renderToolbar ? (
+        renderToolbar({
+          currentStyle,
+          toggleStyle: toggleInlineStyle,
+        })
+      ) : (
+        <div className="w-full">
+          <div className={editorStyles.listsDiv}>
+            {Lists?.map((item) => (
+              <button key={item.id} className={editorStyles.ListStyle}>
+                {item.label}
               </button>
-            );
-          })}
+            ))}
+          </div>
+          <div className={editorStyles.iconToolsDiv}>
+            <div className="flexRow gap-2">
+              {editorTools?.map((item) => {
+                const isActive = currentStyle.has(item.style);
+                return (
+                  <button
+                    key={item.id}
+                    className={clx(
+                      editorStyles.iconTool,
+                      isActive &&
+                        "bg-gray-20 border border-solid border-gray-40"
+                    )}
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      toggleInlineStyle(item.style);
+                    }}
+                  >
+                    {item.toolIcon}
+                  </button>
+                );
+              })}
+            </div>
+            <button className={editorStyles.ResetBtn} onClick={resetEditor}>
+              Reset
+            </button>
+          </div>
         </div>
-        <button className={editorStyles.ResetBtn} onClick={resetEditor}>
-          Reset
-        </button>
-      </div>
+      )}
+
+      {/* editor */}
       <div className={editorStyles.editorStyle}>
         <div className="min-h-[200px] max-h-[400px] w-full">
           <Editor editorState={editorState} onChange={handleChange} />

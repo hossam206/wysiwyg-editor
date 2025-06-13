@@ -1,7 +1,8 @@
 import { LuItalic } from "react-icons/lu";
 import { LuUnderline } from "react-icons/lu";
 import { LuBold } from "react-icons/lu";
-import { FaBold } from "react-icons/fa";
+import { FaBold, FaItalic } from "react-icons/fa";
+
 export const Lists = [
   { id: 1, label: "file" },
   { id: 2, label: "edit" },
@@ -18,12 +19,14 @@ export const editorTools = [
     toolLabel: "Bold",
     style: "BOLD",
     toolIcon: <LuBold />,
+    customToolbarIcon: <FaBold />,
   },
   {
     id: 2,
     toolIcon: <LuItalic />,
     toolLabel: "Italic",
     style: "ITALIC",
+    customToolbarIcon: <FaItalic />,
   },
   {
     id: 3,

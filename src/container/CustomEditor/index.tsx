@@ -2,6 +2,7 @@ import { useState } from "react";
 import WysiwygEditor from "../../components/WysiwygEditor";
 import { customEditorStyles } from "./classNames";
 import { ContentState, convertToRaw } from "draft-js";
+import { editorTools } from "../../components/WysiwygEditor/assets";
 
 const CustomEditor = () => {
   const [activeEditor, setActiveEditor] = useState("controlled");
@@ -33,16 +34,52 @@ const CustomEditor = () => {
           </div>
           {/* toggle show between two editors */}
           {activeEditor === "controlled" ? (
-            <WysiwygEditor
-              key="controlled"
-              value={editorContent}
-              onChange={(updatedContent) => {
-                // console.log("Controlled Updated:", updatedContent);
-                setEditorContent(updatedContent);
-              }}
-            />
+            <>
+              <h1 className="font-medium text-sm text-center  ">
+                This is controlled editor manage his own content
+              </h1>
+              <WysiwygEditor
+                key="controlled"
+                value={editorContent}
+                onChange={(updatedContent) => {
+                  // console.log("Controlled Updated:", updatedContent);
+                  setEditorContent(updatedContent);
+                }}
+              />
+            </>
           ) : (
-            <WysiwygEditor key="uncontrolled" /> // uncontrolled editor
+            // uncontrolled editor
+            <>
+              <h2 className="font-medium text-sm text-center  ">
+                This is uncontrolled editor accept props like styles ,
+                classNames <br /> and customToolbar
+              </h2>
+              <WysiwygEditor
+                key="uncontrolled"
+                className="bg-slate-50 shadow-sm"
+                style={{ borderRadius: "20px" }}
+                renderToolbar={({ currentStyle, toggleStyle }) => (
+                  <div className="flex gap-2 p-2 bg-primary">
+                    {editorTools.map((item) => (
+                      <button
+                        key={item.id}
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          toggleStyle(item.style);
+                        }}
+                        className={`p-1 ${
+                          currentStyle.has(item.style)
+                            ? "text-white font-bold bg-black  rounded-md"
+                            : "text-gray-40 "
+                        }`}
+                      >
+                        {item.customToolbarIcon}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              />
+            </>
           )}
         </div>
       </div>
