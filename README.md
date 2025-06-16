@@ -13,8 +13,6 @@ This is a rich text editor built with React and Draft.js, supporting both contro
 - Simulated async loading (fake API)
 - Unit tested with Vitest + React Testing Library
 
----
-
 # dependencies
 
 - "clsx": "^2.1.1",
