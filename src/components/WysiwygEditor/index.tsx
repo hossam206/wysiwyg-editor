@@ -90,7 +90,7 @@ const WysiwygEditor = ({
                 const isActive = currentStyle.has(item.style);
                 return (
                   <button
-                      data-testid={`toolbar-${item.style.toLowerCase()}`}
+                    data-testid={`toolbar-${item.style.toLowerCase()}`}
                     key={item.id}
                     className={clx(
                       editorStyles.iconTool,
